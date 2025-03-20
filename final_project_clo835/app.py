@@ -3,9 +3,17 @@ from pymysql import connections
 import os
 import random
 import argparse
+import logging
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
+
+# Get configuration from ConfigMap
+BACKGROUND_IMAGE_LOCATION = os.environ.get("BACKGROUND_IMAGE_LOCATION")
+logger.info(f"Background image location from ConfigMap: {BACKGROUND_IMAGE_LOCATION}")
 
 DBHOST = os.environ.get("DBHOST") or "localhost"
 DBUSER = os.environ.get("DBUSER") or "root"
@@ -47,7 +55,7 @@ COLOR = random.choice(["red", "green", "blue", "blue2", "darkblue", "pink", "lim
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', color=color_codes[COLOR])
+    return render_template('addemp.html', color=color_codes[COLOR], background_image_location=BACKGROUND_IMAGE_LOCATION)
 
 @app.route("/about", methods=['GET','POST'])
 def about():
