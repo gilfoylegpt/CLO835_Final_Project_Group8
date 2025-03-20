@@ -55,22 +55,37 @@ def get_background_image():
         logger.error(f"Unexpected error while fetching background image: {str(e)}")
         return None
 
+# Get database credentials from Kubernetes secrets
 DBHOST = os.environ.get("DBHOST") or "localhost"
-DBUSER = os.environ.get("DBUSER") or "root"
-DBPWD = os.environ.get("DBPWD") or "passwors"
+DBUSER = os.environ.get("DBUSER")
+DBPWD = os.environ.get("DBPWD")
 DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT"))
 
+# Log database configuration (without sensitive information)
+logger.info("=== Database Configuration ===")
+logger.info(f"Database host: {DBHOST}")
+logger.info(f"Database name: {DATABASE}")
+logger.info(f"Database port: {DBPORT}")
+if not DBUSER or not DBPWD:
+    logger.error("Database credentials not found in Kubernetes secrets")
+    raise ValueError("Database credentials are required")
+
 # Create a connection to the MySQL database
-db_conn = connections.Connection(
-    host= DBHOST,
-    port=DBPORT,
-    user= DBUSER,
-    password= DBPWD, 
-    db= DATABASE
-    
-)
+try:
+    db_conn = connections.Connection(
+        host=DBHOST,
+        port=DBPORT,
+        user=DBUSER,
+        password=DBPWD, 
+        db=DATABASE
+    )
+    logger.info("Successfully connected to MySQL database")
+except Exception as e:
+    logger.error(f"Failed to connect to MySQL database: {str(e)}")
+    raise
+
 output = {}
 table = 'employee';
 
