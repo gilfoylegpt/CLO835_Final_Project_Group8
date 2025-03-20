@@ -4,6 +4,9 @@ import os
 import random
 import argparse
 import logging
+import boto3
+from botocore.exceptions import ClientError
+import base64
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -14,6 +17,28 @@ app = Flask(__name__)
 # Get configuration from ConfigMap
 BACKGROUND_IMAGE_LOCATION = os.environ.get("BACKGROUND_IMAGE_LOCATION")
 logger.info(f"Background image location from ConfigMap: {BACKGROUND_IMAGE_LOCATION}")
+
+# Initialize S3 client
+s3_client = boto3.client('s3')
+
+def get_background_image():
+    try:
+        if BACKGROUND_IMAGE_LOCATION:
+            # Parse S3 URL
+            bucket_name = BACKGROUND_IMAGE_LOCATION.split('/')[2]
+            object_key = '/'.join(BACKGROUND_IMAGE_LOCATION.split('/')[3:])
+            
+            # Get the object from S3
+            response = s3_client.get_object(Bucket=bucket_name, Key=object_key)
+            image_data = response['Body'].read()
+            logger.info(f"Successfully retrieved background image from S3: {BACKGROUND_IMAGE_LOCATION}")
+            return base64.b64encode(image_data).decode('utf-8')
+        else:
+            logger.warning("No background image location specified in ConfigMap")
+            return None
+    except ClientError as e:
+        logger.error(f"Error accessing S3: {str(e)}")
+        return None
 
 DBHOST = os.environ.get("DBHOST") or "localhost"
 DBUSER = os.environ.get("DBUSER") or "root"
@@ -55,7 +80,8 @@ COLOR = random.choice(["red", "green", "blue", "blue2", "darkblue", "pink", "lim
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', color=color_codes[COLOR], background_image_location=BACKGROUND_IMAGE_LOCATION)
+    background_image = get_background_image()
+    return render_template('addemp.html', color=color_codes[COLOR], background_image=background_image)
 
 @app.route("/about", methods=['GET','POST'])
 def about():
