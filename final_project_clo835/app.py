@@ -19,8 +19,13 @@ app = Flask(__name__)
 
 # Get configuration from ConfigMap
 BACKGROUND_IMAGE_LOCATION = os.environ.get("BACKGROUND_IMAGE_LOCATION")
-logger.info("=== Background Image Configuration ===")
+DEVELOPER_NAME_1 = os.environ.get("DEVELOPER_NAME_1", "Sandesh")
+DEVELOPER_NAME_2 = os.environ.get("DEVELOPER_NAME_2", "Haojie")
+
+logger.info("=== Application Configuration ===")
 logger.info(f"Background image location from ConfigMap: {BACKGROUND_IMAGE_LOCATION}")
+logger.info(f"Developer names: {DEVELOPER_NAME_1} and {DEVELOPER_NAME_2}")
+
 if not BACKGROUND_IMAGE_LOCATION:
     logger.warning("No background image location found in ConfigMap")
 else:
@@ -111,7 +116,11 @@ COLOR = random.choice(["red", "green", "blue", "blue2", "darkblue", "pink", "lim
 @app.route("/", methods=['GET', 'POST'])
 def home():
     background_image = get_background_image()
-    return render_template('addemp.html', color=color_codes[COLOR], background_image=background_image)
+    return render_template('addemp.html', 
+                         color=color_codes[COLOR], 
+                         background_image=background_image,
+                         developer_name_1=DEVELOPER_NAME_1,
+                         developer_name_2=DEVELOPER_NAME_2)
 
 @app.route("/about", methods=['GET','POST'])
 def about():

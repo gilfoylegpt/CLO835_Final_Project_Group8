@@ -3,4 +3,6 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  BACKGROUND_IMAGE_LOCATION: "s3://your-private-bucket/background.jpg" 
+  BACKGROUND_IMAGE_LOCATION: "s3://your-private-bucket/background.jpg"
+  DEVELOPER_NAME_1: "Sandesh"
+  DEVELOPER_NAME_2: "Haojie" 
