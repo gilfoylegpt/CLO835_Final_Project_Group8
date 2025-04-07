@@ -7,3 +7,12 @@ kubectl create secret docker-registry regcred \
  --docker-password=$(aws ecr get-login-password --region us-east-1) \
  -n final
  
+ kubectl apply -f configmap.yaml
+ kubectl apply -f mysql-secret.yaml 
+ kubectl apply -f mysql-pvc.yaml
+ kubectl apply -f serviceaccount.yaml
+ kubectl apply -f mysql-deployment.yaml
+ kubectl apply -f mysql-service.yaml
+ kubectl apply -f app-deployment.yaml
+ kubectl apply -f app-service.yaml
+ 
