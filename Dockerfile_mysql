@@ -1,5 +1,5 @@
 FROM mysql:8.0
 
-COPY ./mysql.sql /tmp
+ADD ./mysql.sql /docker-entrypoint-initdb.d
 
-CMD [ "mysqld", "--init-file=/tmp/mysql.sql" ]
+CMD [ "mysqld" ]
