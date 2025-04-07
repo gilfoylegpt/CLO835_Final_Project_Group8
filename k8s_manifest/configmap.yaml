@@ -7,3 +7,8 @@ data:
   BACKGROUND_IMAGE_LOCATION: "s3://projectclo835/background.jpg"
   DEVELOPER_NAME_1: "Sandesh"
   DEVELOPER_NAME_2: "Haojie"
+  DBHOST: "mysql"
+  DBPORT: "3306"
+  DATABASE: "employees"
+  APP_COLOR: "blue"
+  
