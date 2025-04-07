@@ -26,11 +26,6 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: DBPWD
-        - name: MYSQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: DBUSER
         volumeMounts:
         - name: mysql-storage
           mountPath: /var/lib/mysql
