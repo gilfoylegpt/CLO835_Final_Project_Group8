@@ -18,7 +18,7 @@ spec:
       serviceAccountName: clo835
       containers:
       - name: employees
-        image: 138098912972.dkr.ecr.us-east-1.amazonaws.com/clo835-project-app:v1.0
+        image: 274232764676.dkr.ecr.us-east-1.amazonaws.com/clo835-project-app:latest
         ports:
         - containerPort: 81
         envFrom:
