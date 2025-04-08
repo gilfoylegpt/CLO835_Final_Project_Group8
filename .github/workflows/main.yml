@@ -4,7 +4,7 @@ name: Build and Push to ECR
 
 on:
   push:
-    branches: [ 'current-workspace' ]
+    branches: [ current-workspace ]
 
 env:
   AWS_REGION: us-east-1
