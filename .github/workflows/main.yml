@@ -2,7 +2,7 @@ name: Deploy to ECR
 # updated ECR Repo week3-1 01/22
 on: 
   push:
-    branches: [ current-workspace ]
+    branches: [ main ]
 
 jobs:
   
