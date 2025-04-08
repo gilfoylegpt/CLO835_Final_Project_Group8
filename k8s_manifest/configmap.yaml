@@ -4,7 +4,7 @@ metadata:
   name: app-config
   namespace: final
 data:
-  BACKGROUND_IMAGE_LOCATION: "s3://projectclo835group8/background.jpeg"
+  BACKGROUND_IMAGE_LOCATION: "s3://projectclo835group8/background.jpg"
   DEVELOPER_NAME_1: "Sandesh"
   DEVELOPER_NAME_2: "Haojie"
   DBHOST: "mysql"
