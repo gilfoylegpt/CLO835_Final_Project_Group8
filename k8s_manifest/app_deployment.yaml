@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employees-deployment
+  namespace: final
+  labels:
+    app: employees
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: employees
+  template:
+    metadata:
+      labels:
+        app: employees
+    spec:
+      serviceAccountName: clo835
+      containers:
+      - name: employees
+        image: 138098912972.dkr.ecr.us-east-1.amazonaws.com/clo835-project-app:v1.0
+        ports:
+        - containerPort: 81
+        envFrom:
+        - configMapRef:
+            name: app-config
+        - secretRef:
+            name: mysql-secret
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 81
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 81
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      imagePullSecrets:
+      - name: regcred
