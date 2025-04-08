@@ -13,6 +13,7 @@ kubectl create secret docker-registry regcred \
  kubectl apply -f serviceaccount.yaml
  kubectl apply -f mysql_deployment.yaml
  kubectl apply -f mysql_service.yaml
+ sleep 10
  kubectl apply -f app_deployment.yaml
  kubectl apply -f app_service.yaml
  
