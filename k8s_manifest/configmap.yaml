@@ -4,11 +4,14 @@ metadata:
   name: app-config
   namespace: final
 data:
-  BACKGROUND_IMAGE_LOCATION: "s3://projectclo835group8/background.png"
+  BACKGROUND_IMAGE_LOCATION: "s3://projectclo835group8/background.jpeg"
   DEVELOPER_NAME_1: "Sandesh"
   DEVELOPER_NAME_2: "Haojie"
   DBHOST: "mysql"
   DBPORT: "3306"
   DATABASE: "employees"
-  APP_COLOR: "blue"
-  
+  APP_COLOR: "lime"
+  AWS_ACCESS_KEY_ID: 
+  AWS_SECRET_ACCESS_KEY: 
+  AWS_SESSION_TOKEN: 
+
