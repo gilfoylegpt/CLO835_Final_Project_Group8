@@ -1,4 +1,4 @@
-#Run the workflow
+#Run the workflow for testing the application 
 
 name: Build and Push to ECR
 
