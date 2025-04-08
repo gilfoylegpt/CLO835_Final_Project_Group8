@@ -2,11 +2,11 @@ name: Build and Push to ECR
 
 on:
   push:
-    branches: [ 'sandesh-workspace' ]
+    branches: [ 'current-workspace' ]
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: projectclo835
+  ECR_REPOSITORY: projectclo835group8
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
