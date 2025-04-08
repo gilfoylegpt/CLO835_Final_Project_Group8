@@ -31,7 +31,7 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         DB_REPOSITORY: clo835-project-db
         APP_REPOSITORY: clo835-project-app
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: latest
       run: |
         # mysql image build and push
         docker build -t $ECR_REGISTRY/$DB_REPOSITORY:$IMAGE_TAG -f Dockerfile_mysql . 
