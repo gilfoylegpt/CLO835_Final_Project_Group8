@@ -15,7 +15,7 @@ spec:
       labels:
         app: employees
     spec:
-      serviceAccountName: clo835
+      # serviceAccountName: clo835
       containers:
       - name: employees
         image: 274232764676.dkr.ecr.us-east-1.amazonaws.com/clo835-project-app:latest
