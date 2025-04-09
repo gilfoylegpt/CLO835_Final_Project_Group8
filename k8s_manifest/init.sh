@@ -16,4 +16,5 @@ kubectl create secret docker-registry regcred \
  sleep 10
  kubectl apply -f app_deployment.yaml
  kubectl apply -f app_service.yaml
+
  
